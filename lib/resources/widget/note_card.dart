@@ -10,7 +10,7 @@ class NoteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, "/note_details", arguments: note.key),
+      onTap: () => Navigator.pushNamed(context, "/note_details", arguments: note),
       child: Card(
         surfaceTintColor: Colors.white,
         color: Colors.white,
