@@ -4,8 +4,8 @@ import 'package:note_app_nylo_project/app/model/note.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class NoteDetails extends StatefulWidget {
-  final int? noteKey;
-  const NoteDetails({super.key, required this.noteKey});
+  final Note? note;
+  const NoteDetails({super.key, required this.note});
 
   @override
   State<NoteDetails> createState() => _NoteDetailsState();
@@ -13,32 +13,27 @@ class NoteDetails extends StatefulWidget {
 
 class _NoteDetailsState extends State<NoteDetails> {
   late NoteController _controller;
-  Note? _note;
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
   @override
   void initState() {
     super.initState();
     _controller = NoteController();
-    if (widget.noteKey != null) {
-      _note = _controller.findNote(widget.noteKey!);
-      if (_note != null) {
-        _titleController.text = _note!.title;
-        _contentController.text = _note!.content;
-      }
-    } else {
-      _note = _controller.createNote();
+    if (widget.note != null) {
+      widget.note!.title = _titleController.text;
+      widget.note!.content = _contentController.text;
     }
   }
 
   void _autoSave() {
-    if (_note != null) {
+    if (widget.note != null) {
       _controller.updateNote(
-        _note!,
+        widget.note!,
         title: _titleController.text.trim(),
         content: _contentController.text,
       );
     }
+    _controller.createNote();
   }
 
   @override
@@ -53,6 +48,13 @@ class _NoteDetailsState extends State<NoteDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Padding(
+          padding: EdgeInsets.all(8),
+          child: IconButton(
+            onPressed: _autoSave, 
+            icon: Icon(Icons.arrow_back_ios, size: 30)
+          ),
+        ),
         title: Text("Note"),
         centerTitle: true,
         actions: [
@@ -62,7 +64,7 @@ class _NoteDetailsState extends State<NoteDetails> {
               color: Colors.red, 
             ),
             onPressed: () {
-              _controller.deleteNote(_note!);
+              _controller.deleteNote(widget.note!);
               Navigator.pop(context);
             },
           )

@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/note_page": (context) => NotePage(),
         "/note_details": (context) {
-          final key = ModalRoute.of(context)!.settings.arguments as int?;
-          return NoteDetails(noteKey: key);
+          final key = ModalRoute.of(context)!.settings.arguments as Note?;
+          return NoteDetails(note: key);
         },
       },
     );
