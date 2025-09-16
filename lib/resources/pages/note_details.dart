@@ -29,7 +29,7 @@ class _NoteDetailsState extends State<NoteDetails> {
     if (widget.note != null) {
       _controller.updateNote(
         widget.note!,
-        title: _titleController.text.trim(),
+        title: _titleController.text,
         content: _contentController.text,
       );
     }
