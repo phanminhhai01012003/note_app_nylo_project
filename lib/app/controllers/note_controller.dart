@@ -7,7 +7,10 @@ class NoteController extends NyController {
 
   List<Note> getNotes({String query = ""}) => notesService.getNotes(query: query);
 
-  Note createNote() => notesService.createNote();
+  Note createNote(String title, String content) => notesService.createNote(
+    title: title,
+    content: content
+  );
 
   void updateNote(Note note, {String? title, String? content}) =>
       notesService.updateNote(note, title: title, content: content);

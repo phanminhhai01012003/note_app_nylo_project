@@ -32,13 +32,18 @@ class _NoteDetailsState extends State<NoteDetails> {
         title: _titleController.text,
         content: _contentController.text,
       );
+      Navigator.pop(context);
+    } else {
+      _controller.createNote(
+        _titleController.text,
+        _contentController.text
+      );
+      Navigator.pop(context);
     }
-    _controller.createNote();
   }
 
   @override
   void dispose() {
-    _autoSave();
     _titleController.dispose();
     _contentController.dispose();
     super.dispose();
@@ -51,7 +56,14 @@ class _NoteDetailsState extends State<NoteDetails> {
         leading: Padding(
           padding: EdgeInsets.all(8),
           child: IconButton(
-            onPressed: _autoSave, 
+            onPressed: (){
+              if (_titleController.text.isNotEmpty){
+                _autoSave();
+                Navigator.pop(context);
+              } else {
+                Navigator.pop(context);
+              }
+            }, 
             icon: Icon(Icons.arrow_back_ios, size: 30)
           ),
         ),
