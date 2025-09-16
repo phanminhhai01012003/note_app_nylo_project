@@ -13,10 +13,13 @@ class NoteService {
     ).toList();
   }
 
-  Note createNote() {
+  Note createNote({
+    String title = "",
+    String content = ""
+  }) {
     final note = Note(
-      title: "",
-      content: "",
+      title: title,
+      content: content,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
