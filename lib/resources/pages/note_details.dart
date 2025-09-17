@@ -59,7 +59,6 @@ class _NoteDetailsState extends State<NoteDetails> {
             onPressed: (){
               if (_titleController.text.isNotEmpty){
                 _autoSave();
-                Navigator.pop(context);
               } else {
                 Navigator.pop(context);
               }
@@ -86,11 +85,12 @@ class _NoteDetailsState extends State<NoteDetails> {
         padding: EdgeInsets.all(12),
         child: Column(
           children: [
-            NyTextField(
+            TextField(
               controller: _titleController,
               maxLength: 120,
               decoration: InputDecoration(
                 hintText: "Title",
+                counterText: "",
                 hintStyle: TextStyle(
                   color: Colors.grey,
                   fontSize: 14,
@@ -103,8 +103,9 @@ class _NoteDetailsState extends State<NoteDetails> {
               ),
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: 10),
             Expanded(
-              child: NyTextField(
+              child: TextField(
                 controller: _contentController,
                 maxLines: null,
                 expands: true,
