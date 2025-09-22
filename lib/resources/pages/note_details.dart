@@ -20,8 +20,8 @@ class _NoteDetailsState extends State<NoteDetails> {
     super.initState();
     _controller = NoteController();
     if (widget.note != null) {
-      widget.note!.title = _titleController.text;
-      widget.note!.content = _contentController.text;
+      _titleController.text = widget.note!.title;
+      _contentController.text = widget.note!.content;
     }
   }
 
